@@ -1,0 +1,6 @@
+rootProject.name = "OrderMealApp"
+include ':app'
+include ':common'
+include ':module'
+include ':module:login'
+include ':module:meal'
