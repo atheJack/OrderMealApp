@@ -15,11 +15,13 @@ class UserChooseActivity: BaseActivity() {
             val intent = Intent(this, LoginActivity::class.java )
             intent.putExtra(loginMode, userLogin)
             startActivity(intent)
+            finish()
         }
         iv_manager.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java )
             intent.putExtra(loginMode, managerLogin)
             startActivity(intent)
+            finish()
         }
     }
 
