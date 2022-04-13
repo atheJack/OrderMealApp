@@ -20,4 +20,9 @@ object HostUtil {
      */
     const val REGISTER2 = "/user/register2"
 
+    /**
+     * 登录
+     */
+    const val LOGIN = "/user/login"
+
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_width="@dimen/normal_big_icon_size"
+        android:layout_height="@dimen/normal_big_icon_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:adjustViewBounds="true"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_username"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.example.common.widget.DrawableEditText
+        android:id="@+id/et_username"
+        android:hint="请输入用户名"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_login_background"
+        android:padding="@dimen/normal_padding"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_login_background"
+        android:padding="@dimen/normal_padding"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:hint="请输入密码"
+        app:layout_constraintTop_toBottomOf="@id/et_username"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_password_confirm"
+        />
+
+    <EditText
+        android:id="@+id/et_password_confirm"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_login_background"
+        android:padding="@dimen/normal_padding"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:hint="请确认你的密码"
+        app:layout_constraintTop_toBottomOf="@id/et_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:background="@drawable/bt_login_background"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/et_password_confirm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/normal_margin"
+        />
+
+    <TextView
+        android:id="@+id/tv_registered"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_login"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:text="已注册？去登陆"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

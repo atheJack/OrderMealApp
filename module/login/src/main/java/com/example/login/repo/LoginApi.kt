@@ -8,17 +8,16 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface LoginApi {
-    //todo 还没写
-    @POST
-    fun login(): Call<User>
+    @POST(HostUtil.LOGIN)
+    fun login(@Body user: User): Call<CommonResponse<User>>
 
     @GET(HostUtil.TEST)
     fun getTest(): Call<CommonResponse<List<Test>>>
 
-    @POST("/user/register")
+    @POST(HostUtil.REGISTER)
     fun register(@Body user: User): Call<CommonResponse<User>>
 
-    @POST("/user/register2")
+    @POST(HostUtil.REGISTER2)
     @FormUrlEncoded
     fun register2(@Field(value = "name")name: String, @Field(value = "password")password: String,
                   @Field(value = "is_manager")is_manager: Boolean): Call<CommonResponse<User>>

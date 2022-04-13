@@ -10,4 +10,7 @@
     <!--mine color res-->
     <color name="main_color">#5900FF</color>
     <color name="main_text_color">#000000</color>
+    <color name="normal_edit_background_color">#1E000000</color>
+    <color name="normal_button_select_color">#5E35B1</color>
+    <color name="normal_button_not_select_color">#0D89F7</color>
 </resources>

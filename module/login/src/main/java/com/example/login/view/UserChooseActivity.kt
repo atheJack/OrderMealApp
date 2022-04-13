@@ -1,8 +1,11 @@
-package com.example.login
+package com.example.login.view
 import android.content.Intent
+import androidx.lifecycle.ViewModel
 import com.example.common.BaseActivity
+import com.example.common.BaseViewModel
+import com.example.login.R
 import kotlinx.android.synthetic.main.activity_user_choose.*
-class UserChooseActivity: BaseActivity() {
+class UserChooseActivity: BaseActivity<BaseViewModel>() {
 
     companion object{
         const val userLogin = 1
@@ -27,6 +30,10 @@ class UserChooseActivity: BaseActivity() {
 
     override fun getContentLayoutId(): Int {
         return R.layout.activity_user_choose
+    }
+
+    override fun createVm(): BaseViewModel {
+        TODO("Not yet implemented")
     }
 
 }
