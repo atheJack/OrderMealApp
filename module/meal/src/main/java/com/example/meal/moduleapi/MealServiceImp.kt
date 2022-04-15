@@ -1,0 +1,16 @@
+package com.example.meal.moduleapi
+
+import android.content.Context
+import com.example.meal.adapter.ShopCartFoodListAdapter
+import com.example.meal.model.Food
+import com.example.meal_api.MealService
+
+object MealServiceImp: MealService {
+    override fun getAdapter(context: Context, list: List<Any>): Any {
+        return ShopCartFoodListAdapter(context, list as List<Food>)
+    }
+
+    override fun getFoodObject(): Any {
+        return Food()
+    }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OrderMealApp.iml" filepath="$PROJECT_DIR$/.idea/modules/OrderMealApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OrderMealApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OrderMealApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/OrderMealApp.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/OrderMealApp.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/OrderMealApp.module.iml" filepath="$PROJECT_DIR$/.idea/modules/module/OrderMealApp.module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/OrderMealApp.module-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/OrderMealApp.module-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" filepath="$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/meal/OrderMealApp.module.meal.iml" filepath="$PROJECT_DIR$/.idea/modules/module/meal/OrderMealApp.module.meal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/order/OrderMealApp.module.order.iml" filepath="$PROJECT_DIR$/.idea/modules/module/order/OrderMealApp.module.order.iml" />
+    </modules>
+  </component>
+</project>

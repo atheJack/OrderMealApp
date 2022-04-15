@@ -6,5 +6,7 @@
     <dimen name="normal_edit_text_width">200dp</dimen>
     <dimen name="normal_padding">5dp</dimen>
     <dimen name="normal_background_corner">5dp</dimen>
+    <dimen name="big_background_corner">10dp</dimen>
     <dimen name="normal_action_bar_height">44dp</dimen>
+    <dimen name="title_bar_icon_size">20dp</dimen>
 </resources>

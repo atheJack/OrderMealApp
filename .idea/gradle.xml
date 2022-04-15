@@ -14,8 +14,12 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module-api" />
+            <option value="$PROJECT_DIR$/module-api/login-api" />
+            <option value="$PROJECT_DIR$/module-api/meal-api" />
             <option value="$PROJECT_DIR$/module/login" />
             <option value="$PROJECT_DIR$/module/meal" />
+            <option value="$PROJECT_DIR$/module/order" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

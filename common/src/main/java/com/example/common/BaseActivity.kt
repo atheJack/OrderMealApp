@@ -2,15 +2,17 @@ package com.example.common
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.example.common.util.StatusBarUtil
 
 abstract class BaseActivity<T: BaseViewModel> : AppCompatActivity() {
 
-    protected lateinit var viewModel: T
+    lateinit var viewModel: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getContentLayoutId())
         viewModel = ViewModelProviders.of(this).get(createVm()::class.java)
+        //StatusBarUtil.setWindowStatusBarColor(this, R.color.white)
         onInit()
     }
 

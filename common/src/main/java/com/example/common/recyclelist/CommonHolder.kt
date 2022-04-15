@@ -9,5 +9,5 @@ abstract class CommonHolder<E>(itemView: View) : RecyclerView.ViewHolder(itemVie
         return itemView.findViewById<T>(id)
     }
 
-    abstract fun bind(data: List<E>, holder: CommonHolder<E>, position: Int)
+    abstract fun bind(data: List<E>, holder: CommonHolder<E>, position: Int, listener: CommonItemClickListener<E>?)
 }

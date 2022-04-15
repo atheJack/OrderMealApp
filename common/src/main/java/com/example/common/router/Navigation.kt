@@ -6,7 +6,7 @@ import android.os.Bundle
 
 object Navigation {
 
-    const val EXTRA_DATA = "extra_data"
+    private const val EXTRA_DATA = "extra_data"
 
     fun jump(context: Context, page: PageInfo) {
         val intent = Intent(context, Class.forName(page.pageName))

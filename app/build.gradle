@@ -46,4 +46,7 @@ dependencies {
     implementation project(':common')
     implementation project(':module:login')
     implementation project(':module:meal')
+    implementation project(':module:order')
+    implementation project(':module-api:login-api')
+    implementation project(':module-api:meal-api')
 }
