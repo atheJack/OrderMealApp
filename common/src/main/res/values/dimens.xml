@@ -3,10 +3,14 @@
     <dimen name="normal_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="normal_big_icon_size">150dp</dimen>
+    <dimen name="choose_icon_size">100dp</dimen>
+    <dimen name="order_img_size">50dp</dimen>
     <dimen name="normal_edit_text_width">200dp</dimen>
     <dimen name="normal_padding">5dp</dimen>
+    <dimen name="small_icon_size">24dp</dimen>
     <dimen name="normal_background_corner">5dp</dimen>
     <dimen name="big_background_corner">10dp</dimen>
     <dimen name="normal_action_bar_height">44dp</dimen>
+    <dimen name="normal_float_button_size">56dp</dimen>
     <dimen name="title_bar_icon_size">20dp</dimen>
 </resources>

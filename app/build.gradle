@@ -10,6 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ordermealapp"
+        multiDexEnabled true
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -37,6 +38,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
@@ -47,6 +49,8 @@ dependencies {
     implementation project(':module:login')
     implementation project(':module:meal')
     implementation project(':module:order')
+    implementation project(':module:manager')
+    implementation project(':module:main')
     implementation project(':module-api:login-api')
     implementation project(':module-api:meal-api')
 }

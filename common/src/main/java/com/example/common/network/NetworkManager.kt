@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkManager {
 
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(HostUtil.URL_TEST)
+        .baseUrl(HostUtil.URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

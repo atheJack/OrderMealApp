@@ -3,14 +3,31 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_action_bar_height"
+        android:background="@color/app_status_bar_color">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_bar_icon_size"
+            android:layout_height="@dimen/title_bar_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back_white" />
+
         <TextView
-            android:id="@+id/tv_test"
-            android:text="点餐页面"
-            android:background="@color/black"
+            android:id="@+id/tv_title"
             style="@style/titleBarText"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/normal_action_bar_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="点餐页面" />
+    </RelativeLayout>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -55,13 +72,13 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"/>
                 <TextView
-                    android:id="@+id/tv_go_pay"
-                    android:text="去结算"
+                    android:id="@+id/tv_go_order"
+                    android:text="去下单"
                     android:padding="@dimen/normal_margin"
                     android:layout_marginRight="@dimen/normal_margin"
                     android:layout_marginVertical="@dimen/small_margin"
                     android:gravity="center"
-                    android:background="#ffff00"
+                    android:background="@color/app_status_bar_color"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             </LinearLayout>

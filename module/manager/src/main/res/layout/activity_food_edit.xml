@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.FoodEditActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_action_bar_height"
+        android:background="@color/app_status_bar_color">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_bar_icon_size"
+            android:layout_height="@dimen/title_bar_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back_white" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="菜品信息修改" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_food_img"
+        android:layout_width="@dimen/normal_big_icon_size"
+        android:layout_height="@dimen/normal_big_icon_size"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_yxrs" />
+
+    <Button
+        android:id="@+id/bt_change_img"
+        style="@style/normalSmallText"
+        android:layout_width="@dimen/normal_big_icon_size"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_change_img_button"
+        android:text="更换图片"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin">
+
+        <TextView
+            style="@style/normalBlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:padding="@dimen/small_margin"
+            android:text="菜品名称："
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/et_food_name"
+            style="@style/normalBlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/normal_margin"
+            android:layout_weight="1"
+            android:background="@drawable/bg_login_edit"
+            android:gravity="left"
+            android:padding="@dimen/small_margin"
+            android:text="鱼香肉丝"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin">
+
+        <TextView
+            style="@style/normalBlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:padding="@dimen/small_margin"
+            android:text="菜品价格："
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/et_food_price"
+            style="@style/normalBlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/normal_margin"
+            android:layout_weight="1"
+            android:background="@drawable/bg_login_edit"
+            android:gravity="left"
+            android:inputType="number"
+            android:padding="@dimen/small_margin"
+            android:text="18.0"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_finish_edit"
+        style="@style/normalSmallText"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="right"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/bg_login_button"
+        android:text="修改完成"
+        android:textColor="@color/white" />
+
+</LinearLayout>

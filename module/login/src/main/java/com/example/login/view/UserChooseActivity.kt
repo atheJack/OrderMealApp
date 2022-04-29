@@ -1,29 +1,30 @@
 package com.example.login.view
-import android.content.Intent
-import androidx.lifecycle.ViewModel
+
 import com.example.common.BaseActivity
 import com.example.common.BaseViewModel
+import com.example.common.router.Navigation
+import com.example.common.router.Router
+import com.example.common.sharepreference.SharedPreferenceConst
+import com.example.common.sharepreference.SharedPreferenceUtil
 import com.example.login.R
 import kotlinx.android.synthetic.main.activity_user_choose.*
 class UserChooseActivity: BaseActivity<BaseViewModel>() {
 
-    companion object{
-        const val userLogin = 1
-        const val managerLogin = 2
-        const val loginMode = "login_mode"
-    }
-
     override fun onInit() {
-        iv_user.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java )
-            intent.putExtra(loginMode, userLogin)
-            startActivity(intent)
+        ll_user.setOnClickListener {
+            if(!SharedPreferenceUtil.contains(this, SharedPreferenceConst.LOGIN_MODE)) {
+                SharedPreferenceUtil.putIntAsync(this,
+                    SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.USER_LOGIN)
+            }
+            Navigation.jump(this, Router.REGISTER)
             finish()
         }
-        iv_manager.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java )
-            intent.putExtra(loginMode, managerLogin)
-            startActivity(intent)
+        ll_manager.setOnClickListener {
+            if(!SharedPreferenceUtil.contains(this, SharedPreferenceConst.LOGIN_MODE)) {
+                SharedPreferenceUtil.putIntAsync(this,
+                    SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.MANAGER_LOGIN)
+            }
+            Navigation.jump(this, Router.REGISTER)
             finish()
         }
     }
@@ -33,7 +34,7 @@ class UserChooseActivity: BaseActivity<BaseViewModel>() {
     }
 
     override fun createVm(): BaseViewModel {
-        TODO("Not yet implemented")
+        return BaseViewModel()
     }
 
 }

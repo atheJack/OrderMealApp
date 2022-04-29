@@ -1,25 +1,20 @@
 package com.example.login.view
-import android.os.Bundle
 import com.example.common.BaseActivity
+import com.example.common.database.DbManager
 import com.example.common.router.Navigation
 import com.example.common.router.Router
+import com.example.common.sharepreference.SharedPreferenceConst
+import com.example.common.sharepreference.SharedPreferenceUtil
 import com.example.common.util.ToastUtil
 import com.example.login.R
-import com.example.login.model.User
+import com.example.common.model.User
 import com.example.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<LoginViewModel>() {
+
     override fun createVm(): LoginViewModel {
         return LoginViewModel()
-    }
-
-    private var mode = -1
-
-    companion object{
-        const val userLogin = 1
-        const val managerLogin = 2
-        const val loginMode = "login_mode"
     }
 
     override fun onInit() {
@@ -28,8 +23,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     }
 
     private fun initView() {
-        val intent = intent
-        mode = intent.getIntExtra(loginMode, -1)
         bt_login.setOnClickListener {
             login()
         }
@@ -38,7 +31,19 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     private fun initObserver() {
         viewModel.loginData.observe(this, {
             if(it.code == 200) {
-                Navigation.jump(this, Router.MEAL)
+                SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.LOGIN_STATE,
+                    SharedPreferenceConst.LoginStateValue.HAS_LOGIN)
+                Thread {
+                    DbManager.getInstance().getDb(this).userDao().deleteAll()
+                    DbManager.getInstance().getDb(this).userDao().insert(it.data)
+                }.start()
+                if (it.data.isManager) {
+                    SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.MANAGER_LOGIN)
+                    Navigation.jump(this, Router.MAIN_MANAGER)
+                } else {
+                    SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.USER_LOGIN)
+                    Navigation.jump(this, Router.MAIN)
+                }
             } else {
                 ToastUtil.showToastShort(this, it.message)
             }
@@ -48,19 +53,11 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     private fun login() {
         val username = et_username.text.toString()
         val password = et_password.text.toString()
-        //todo -> upload username password mode
-        if (mode == userLogin) {
-            // jump to user
-        } else if(mode == managerLogin){
-            // jump to manager
+        if (username == "" || password == "") {
+            ToastUtil.showToastShort(this, "用户名或密码为空！")
+        } else {
+            viewModel.login(User(name = username, password = password))
         }
-        viewModel.login(User(1, username, password, false))
-    }
-
-    fun testNav() {
-        Navigation.jumpWithBundle(this, Router.MEAL, Bundle().apply {
-            putString("ceshi", "lqs lqs lqs")
-        })
     }
 
     override fun getContentLayoutId(): Int {

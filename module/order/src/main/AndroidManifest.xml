@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.order">
+
     <application>
-        <activity android:name=".OrderActivity">
+        <activity android:name=".view.OrderFinishActivity">
+
+        </activity>
+        <activity android:name=".view.OrderDetailActivity">
+
+        </activity>
+        <activity android:name=".view.MyOrderActivity">
+
+        </activity>
+
+        <activity android:name=".view.ManagerOrderActivity">
+
         </activity>
     </application>
+
 </manifest>

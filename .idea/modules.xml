@@ -10,6 +10,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" filepath="$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/main/OrderMealApp.module.main.iml" filepath="$PROJECT_DIR$/.idea/modules/module/main/OrderMealApp.module.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/manager/OrderMealApp.module.manager.iml" filepath="$PROJECT_DIR$/.idea/modules/module/manager/OrderMealApp.module.manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/meal/OrderMealApp.module.meal.iml" filepath="$PROJECT_DIR$/.idea/modules/module/meal/OrderMealApp.module.meal.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/order/OrderMealApp.module.order.iml" filepath="$PROJECT_DIR$/.idea/modules/module/order/OrderMealApp.module.order.iml" />
     </modules>

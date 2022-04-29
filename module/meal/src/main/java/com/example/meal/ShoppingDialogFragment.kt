@@ -6,7 +6,7 @@ import com.example.common.BaseViewModel
 import com.example.common.util.FragmentUtil
 import com.example.common.util.LogUtil
 import com.example.meal.adapter.ShopCartFoodListAdapter
-import com.example.meal.model.Food
+import com.example.common.model.Food
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 class ShoppingDialogFragment: BaseFragment<BaseViewModel>() {

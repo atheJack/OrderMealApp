@@ -1,4 +1,5 @@
 package com.example.meal
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +11,7 @@ import com.example.common.router.Router
 import com.example.common.util.FragmentUtil
 import com.example.common.util.ToastUtil
 import com.example.meal.adapter.MealFoodListAdapter
-import com.example.meal.model.Food
+import com.example.common.model.Food
 import com.example.meal.viewmodel.MealViewModel
 import kotlinx.android.synthetic.main.activity_meal.*
 
@@ -44,8 +45,13 @@ class MealActivity: BaseActivity<MealViewModel>() {
 
     private fun initView() {
         viewModel.getFoodList()
-        tv_go_pay.setOnClickListener {
-            Navigation.jump(this, Router.ORDER)
+        tv_go_order.setOnClickListener {
+            Navigation.jumpWithBundle(this, Router.ORDER_DETAIL, Bundle().apply {
+                putSerializable("food_list", viewModel.shopCartFoodData.value)
+                putInt("launch_mode", 1)
+                viewModel.totalNum.value?.let { num -> putInt("total_num", num) }
+                viewModel.totalPrice.value?.let { price -> putFloat("total_price", price) }
+            })
         }
         iv_open_shopping_cart.setOnClickListener {
             if (!fragment.isAdded) {
@@ -58,6 +64,9 @@ class MealActivity: BaseActivity<MealViewModel>() {
             } else if(fragment.isHidden) {
                 FragmentUtil.showFragment(this, fragment)
             }
+        }
+        iv_back.setOnClickListener {
+            onBackPressed()
         }
     }
 

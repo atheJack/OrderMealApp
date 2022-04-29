@@ -11,7 +11,7 @@
     <color name="main_color">#ffffff</color>
     <color name="main_text_color">#000000</color>
     <color name="normal_edit_background_color">#1E000000</color>
-    <color name="normal_button_select_color">#5E35B1</color>
-    <color name="normal_button_not_select_color">#000000</color>
-    <color name="app_status_bar_color">#000000</color>
+    <color name="normal_button_select_color">#FB8C00</color>
+    <color name="normal_button_not_select_color">#FDC400</color>
+    <color name="app_status_bar_color">#FDC400</color>
 </resources>

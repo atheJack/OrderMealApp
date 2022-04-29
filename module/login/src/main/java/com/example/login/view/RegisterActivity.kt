@@ -2,9 +2,11 @@ package com.example.login.view
 import com.example.common.BaseActivity
 import com.example.common.router.Navigation
 import com.example.common.router.Router
+import com.example.common.sharepreference.SharedPreferenceConst
+import com.example.common.sharepreference.SharedPreferenceUtil
 import com.example.common.util.ToastUtil
 import com.example.login.R
-import com.example.login.model.User
+import com.example.common.model.User
 import com.example.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.et_password
 import kotlinx.android.synthetic.main.activity_login.et_username
@@ -30,6 +32,8 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
         viewModel.registerData.observe(this,{
             //TODO 需要一个用户提示
             if (it.code == 200) {
+                SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.REGISTER_STATE,
+                SharedPreferenceConst.RegisterStateValue.HAS_REGISTER)
                 Navigation.jump(this, Router.LOGIN)
             }
         })
@@ -44,7 +48,13 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
         } else if(password != passwordConfirm){
             ToastUtil.showToastShort(this, "密码与确认密码不一致！")
         } else {
-            viewModel.register(User(1,name,password,false))
+            val mode = SharedPreferenceUtil.getInt(this,
+                SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.USER_LOGIN)
+            if(mode == SharedPreferenceConst.LoginModeValue.USER_LOGIN) {
+                viewModel.register(User(1, name, password, false))
+            } else {
+                viewModel.register(User(1, name, password, true))
+            }
         }
     }
 

@@ -3,7 +3,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.common.BaseViewModel
 import com.example.common.network.CommonResponse
 import com.example.common.network.NetworkManager
-import com.example.login.model.User
+import com.example.common.model.User
 import com.example.login.repo.LoginApi
 import retrofit2.Call
 import retrofit2.Callback

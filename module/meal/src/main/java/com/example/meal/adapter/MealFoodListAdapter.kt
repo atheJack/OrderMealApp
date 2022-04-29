@@ -7,10 +7,10 @@ import com.example.common.recyclelist.CommonAdapter
 import com.example.common.recyclelist.CommonItemClickListener
 import com.example.meal.R
 import com.example.meal.holder.FoodHolder
-import com.example.meal.model.Food
+import com.example.common.model.Food
 
 class MealFoodListAdapter(var context: Context, var data: List<Food>,
-                          var listener: CommonItemClickListener<Food>?): CommonAdapter<FoodHolder,Food>() {
+                          var listener: CommonItemClickListener<Food>?): CommonAdapter<FoodHolder, Food>() {
 
     constructor(context: Context, data: List<Food>): this(context, data, null)
 

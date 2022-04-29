@@ -1,6 +1,5 @@
 package com.example.common.util
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 

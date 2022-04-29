@@ -4,50 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity">
+    tools:context=".view.RegisterActivity">
+
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/app_status_bar_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_action_bar_height">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_back"
+            android:src="@drawable/ic_back_white"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/title_bar_icon_size"
+            android:layout_height="@dimen/title_bar_icon_size"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="登录" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/ic_login_img"
+        android:layout_width="@dimen/normal_big_icon_size"
+        android:layout_height="@dimen/normal_big_icon_size"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:adjustViewBounds="true"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/et_username"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/ic_launcher"
         />
 
-     <EditText
-         android:id="@+id/et_username"
-         android:hint="username"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         app:layout_constraintVertical_chainStyle="packed"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintBottom_toTopOf="@id/et_password"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         />
+    <EditText
+        android:id="@+id/et_username"
+        android:hint="请输入用户名"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_login_edit"
+        android:padding="@dimen/normal_padding"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/normal_edit_text_width"
         android:layout_height="wrap_content"
-        android:hint="password"
+        android:background="@drawable/bg_login_edit"
+        android:padding="@dimen/normal_padding"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/et_username"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bt_login"
         />
 
     <Button
         android:id="@+id/bt_login"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/normal_edit_text_width"
+        android:background="@drawable/bg_login_button"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:text="登录"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/et_password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/normal_margin"
         />
 
