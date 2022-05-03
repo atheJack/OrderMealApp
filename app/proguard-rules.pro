@@ -19,3 +19,40 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#TPNS SDK
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep class com.tencent.android.tpush.** {*;}
+-keep class com.tencent.tpns.baseapi.** {*;}
+-keep class com.tencent.tpns.mqttchannel.** {*;}
+-keep class com.tencent.tpns.dataacquisition.** {*;}
+
+#华为通道
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+-keep class com.hianalytics.android.**{*;}
+-keep class com.huawei.updatesdk.**{*;}
+-keep class com.huawei.hms.**{*;}
+-keep class com.huawei.android.hms.agent.**{*;}
+
+##小米通道
+#-keep class com.xiaomi.**{*;}
+#-keep public class * extends com.xiaomi.mipush.sdk.PushMessageReceiver
+
+#魅族通道
+-dontwarn com.meizu.cloud.pushsdk.**
+-keep class com.meizu.cloud.pushsdk.**{*;}
+
+#OPPO通道
+-keep public class * extends android.app.Service
+-keep class com.heytap.mcssdk.**  {*;}
+-keep class com.heytap.msp.** { *;}
+
+##VIVO通道
+#-dontwarn com.vivo.push.**
+#-keep class com.vivo.push.**{*; }
+#-keep class com.vivo.vms.**{*; }
+#-keep class com.tencent.android.vivopush.VivoPushMessageReceiver{*;}

@@ -1,0 +1,14 @@
+{
+    "tpns": {
+        "access_id": "1500030686",
+        "access_key": "AC8CB10X1HUU"
+    },
+    "com.example.ordermealapp": {
+        "channel": {
+            "enable": true
+        }
+    },
+    "debug": false,
+    "version": "1.3.3.3-release",
+    "upgrade": true
+}

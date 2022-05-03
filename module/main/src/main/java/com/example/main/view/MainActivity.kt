@@ -25,6 +25,7 @@ class MainActivity: BaseActivity<BaseViewModel>() {
             Navigation.jump(this, Router.MY_ORDER)
         }
         ll_login.setOnClickListener {
+            ActivityUtil.finishAll()
             Navigation.jump(this, Router.LOGIN)
         }
         ll_exit.setOnClickListener {

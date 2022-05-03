@@ -48,13 +48,8 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
         } else if(password != passwordConfirm){
             ToastUtil.showToastShort(this, "密码与确认密码不一致！")
         } else {
-            val mode = SharedPreferenceUtil.getInt(this,
-                SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.USER_LOGIN)
-            if(mode == SharedPreferenceConst.LoginModeValue.USER_LOGIN) {
-                viewModel.register(User(1, name, password, false))
-            } else {
-                viewModel.register(User(1, name, password, true))
-            }
+            // 只允许用户注册
+            viewModel.register(User(name = name, password = password, isManager = false))
         }
     }
 

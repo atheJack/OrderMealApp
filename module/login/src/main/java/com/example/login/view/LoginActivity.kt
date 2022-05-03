@@ -8,6 +8,7 @@ import com.example.common.sharepreference.SharedPreferenceUtil
 import com.example.common.util.ToastUtil
 import com.example.login.R
 import com.example.common.model.User
+import com.example.common.util.ActivityUtil
 import com.example.login.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -37,6 +38,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                     DbManager.getInstance().getDb(this).userDao().deleteAll()
                     DbManager.getInstance().getDb(this).userDao().insert(it.data)
                 }.start()
+                ActivityUtil.finishAll()
                 if (it.data.isManager) {
                     SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.MANAGER_LOGIN)
                     Navigation.jump(this, Router.MAIN_MANAGER)

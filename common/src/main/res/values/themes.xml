@@ -15,7 +15,7 @@
     </style>
 
     <style name="splashStyle" parent="Theme.OrderMealApp">
-        <item name="android:windowBackground">@color/app_status_bar_color</item>
+        <item name="android:windowBackground">@drawable/bg_welcome</item>
     </style>
 
     <style name="normalText">
