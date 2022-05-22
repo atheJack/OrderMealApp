@@ -2,9 +2,9 @@ package com.example.manager.view
 
 import android.Manifest
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
@@ -13,6 +13,7 @@ import android.os.Handler
 import android.os.Looper
 import com.example.common.BaseActivity
 import com.example.common.model.Food
+import com.example.common.util.DialogUtil
 import com.example.common.util.FileUtil
 import com.example.common.util.ToastUtil
 import com.example.manager.R
@@ -25,6 +26,7 @@ import java.io.File
 
 class AddFoodActivity: BaseActivity<ManagerViewModel>() {
     private var file: File? = null
+    private lateinit var progressDialog: ProgressDialog
     override fun createVm(): ManagerViewModel {
         return ManagerViewModel()
     }
@@ -41,17 +43,22 @@ class AddFoodActivity: BaseActivity<ManagerViewModel>() {
             } else {
                 ToastUtil.showToastLong(this, it.message)
             }
+            if (progressDialog.isShowing) {
+                progressDialog.dismiss()
+            }
         })
     }
 
     private fun initView() {
+        progressDialog = DialogUtil.getLoadingDialog(this, "请等待", "正在上传图片..", false)
         bt_commit.setOnClickListener {
             if (file == null) {
                 commit("http://xilelqs.top/img/yxrs.png")
             } else {
+                progressDialog.show()
                 val foodName = et_food_name.text.toString() + ".png"
                 Thread{
-                    val newFile = FileUtil.saveAndCompressBitmap(
+                    val newFile = FileUtil.saveBitmapToFile(
                         this,
                         BitmapFactory.decodeFile(file!!.absolutePath),
                         foodName

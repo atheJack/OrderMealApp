@@ -18,6 +18,7 @@ import java.util.ArrayList
 class MyOrderViewModel: BaseViewModel() {
 
     val orderData: MutableLiveData<CommonResponse<List<Order>>> = MutableLiveData()
+    val orderCurr: MutableLiveData<CommonResponse<Order>> = MutableLiveData()
     private val api = NetworkManager.getApi(OrderApi::class.java)
 
     fun getOrderList(user: User) {
@@ -42,7 +43,7 @@ class MyOrderViewModel: BaseViewModel() {
                 call: Call<CommonResponse<Order>>?,
                 response: Response<CommonResponse<Order>>?
             ) {
-
+                orderCurr.postValue(response?.body())
             }
 
             override fun onFailure(call: Call<CommonResponse<Order>>?, t: Throwable?) {

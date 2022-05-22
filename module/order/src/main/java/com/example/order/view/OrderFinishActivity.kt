@@ -14,10 +14,16 @@ class OrderFinishActivity : BaseActivity<BaseViewModel>() {
     }
 
     override fun onInit() {
+        getData()
         bt_go_order.setOnClickListener {
             ActivityUtil.backToMain()
             Navigation.jump(this, Router.MY_ORDER)
         }
+    }
+
+    private fun getData() {
+        val orderId = Navigation.getBundle(intent)?.getInt("order_id")
+        tv_order_num.text = "单号：${String.format("%03d", orderId)}"
     }
 
     override fun getContentLayoutId(): Int {

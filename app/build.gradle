@@ -3,12 +3,14 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id "com.tencent.android.tpns"
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "com.example.ordermealapp"
         multiDexEnabled true
@@ -59,4 +61,11 @@ dependencies {
     implementation project(':module:main')
     implementation project(':module-api:login-api')
     implementation project(':module-api:meal-api')
+    implementation project(':module-api:app-api')
+
+    def room_version = "2.1.0"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 }

@@ -8,6 +8,7 @@ import com.example.common.recyclelist.CommonHolder
 import com.example.common.recyclelist.CommonItemClickListener
 import com.example.meal.R
 import com.example.common.model.Food
+import com.example.common.util.GlideUtil
 
 class FoodHolder(itemView: View) : CommonHolder<Food>(itemView){
 
@@ -26,7 +27,7 @@ class FoodHolder(itemView: View) : CommonHolder<Food>(itemView){
         foodNum.text = "${data[position].num}"
         foodPrice.text = "￥${data[position].price}"
         val url = data[position].imgUrl
-        Glide.with(itemView).load(url).into(foodImg)
+        GlideUtil.loadUrl(itemView.context, url, foodImg)
         listener?.onClick(itemView, data, position)
     }
 

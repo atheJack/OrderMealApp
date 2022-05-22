@@ -2,6 +2,7 @@ package com.example.manager.view
 
 import android.Manifest
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -14,7 +15,11 @@ import com.bumptech.glide.Glide
 import com.example.common.BaseActivity
 import com.example.common.model.Food
 import com.example.common.router.Navigation
+import com.example.common.sharepreference.SharedPreferenceConst
+import com.example.common.sharepreference.SharedPreferenceUtil
+import com.example.common.util.DialogUtil
 import com.example.common.util.FileUtil
+import com.example.common.util.GlideUtil
 import com.example.common.util.ToastUtil
 import com.example.manager.R
 import com.example.manager.viewmodel.ManagerViewModel
@@ -34,6 +39,7 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
 
     private var food: Food = Food()
     private var file: File? = null
+    private lateinit var progressDialog: ProgressDialog
     override fun createVm(): ManagerViewModel {
         return ManagerViewModel()
     }
@@ -46,25 +52,31 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
     private fun initObserver() {
         viewModel.foodEditImgUrl.observe(this, {
             if (it.code == 200) {
+                SharedPreferenceUtil.putLongSync(this, SharedPreferenceConst.GLIDE_SIGN, System.currentTimeMillis())
                 commitFood(it.data)
             } else {
                 ToastUtil.showToastLong(this, it.message)
+            }
+            if (progressDialog.isShowing) {
+                progressDialog.dismiss()
             }
         })
     }
 
     private fun initView() {
         getData()
+        progressDialog = DialogUtil.getLoadingDialog(this, "请等待", "正在上传图片..", false)
         et_food_name.setText(food.name)
         et_food_price.setText(food.price.toString())
-        Glide.with(this).load(food.imgUrl).into(iv_food_img)
+        GlideUtil.loadUrlWithSign(this, food.imgUrl, iv_food_img)
         bt_finish_edit.setOnClickListener {
             if (file == null) {
                 commitFood(food.imgUrl)
             } else {
+                progressDialog.show()
                 val foodName = et_food_name.text.toString() + ".png"
                 Thread{
-                    val newFile = FileUtil.saveAndCompressBitmap(
+                    val newFile = FileUtil.saveBitmapToFile(
                         this,
                         BitmapFactory.decodeFile(file!!.absolutePath),
                         foodName

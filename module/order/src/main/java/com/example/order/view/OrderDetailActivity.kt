@@ -1,17 +1,20 @@
 package com.example.order.view
+import android.app.ProgressDialog
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.common.BaseActivity
-import com.example.common.BaseViewModel
 import com.example.common.ModuleServiceLoader
 import com.example.common.database.DbManager
 import com.example.common.model.Food
 import com.example.common.model.Order
-import com.example.common.model.User
 import com.example.common.router.Navigation
 import com.example.common.router.Router
+import com.example.common.util.AppUtil
+import com.example.common.util.DialogUtil
 import com.example.common.util.LogUtil
+import com.example.common.util.ToastUtil
 import com.example.meal_api.IMealService
 import com.example.order.R
 import com.example.order.viewmodel.MyOrderViewModel
@@ -24,6 +27,7 @@ class OrderDetailActivity : BaseActivity<MyOrderViewModel>() {
     private var launchMode: Int = MODE_CONFIRM
     private var totalNum: Int = 0
     private var order: Order = Order()
+    private lateinit var progressDialog: ProgressDialog
 
     companion object{
         const val MODE_CONFIRM = 1
@@ -40,22 +44,34 @@ class OrderDetailActivity : BaseActivity<MyOrderViewModel>() {
 
     override fun onInit() {
         getData()
+        progressDialog = DialogUtil.getLoadingDialog(this, "请等待", "正在下单..", false)
         iv_back.setOnClickListener{
             onBackPressed()
-        }
-        tv_title.setOnClickListener {
-            val obj = ModuleServiceLoader.instance.get(IMealService::class.java)?.getFoodObject()
-            LogUtil.d(obj.toString())
         }
         rv_order_food_list.adapter =
             ModuleServiceLoader.instance.get(IMealService::class.java)?.getAdapter(this, listData) as RecyclerView.Adapter<*>?
         rv_order_food_list.layoutManager = LinearLayoutManager(this)
         tv_go_pay.setOnClickListener {
             generateOrder()
-            Navigation.jump(this, Router.ORDER_FINISH)
         }
         tv_total_num.text = "￥${totalPrice}"
         tv_sum_price.text = "￥${totalPrice}"
+        initObserver()
+    }
+
+    private fun initObserver() {
+        viewModel.orderCurr.observe(this, {
+            if (it.code == 200) {
+                Navigation.jumpWithBundle(this, Router.ORDER_FINISH, Bundle().apply {
+                    putInt("order_id", it.data.id)
+                })
+            } else {
+                ToastUtil.showToastLong(this, "下单失败，请重试！")
+            }
+            if (progressDialog.isShowing) {
+                progressDialog.dismiss()
+            }
+        })
     }
 
     private fun getData() {
@@ -70,7 +86,6 @@ class OrderDetailActivity : BaseActivity<MyOrderViewModel>() {
             ll_order_confirm_view.visibility = View.GONE
             tv_title.text = "订单详情"
         }
-
     }
 
     private fun generateOrder() {
@@ -89,5 +104,6 @@ class OrderDetailActivity : BaseActivity<MyOrderViewModel>() {
             order.foodList = listData as List<Food>
             viewModel.generateOrder(order)
         }.start()
+        progressDialog.show()
     }
 }

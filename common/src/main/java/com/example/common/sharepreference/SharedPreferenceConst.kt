@@ -19,4 +19,6 @@ object SharedPreferenceConst {
         const val NO_REGISTER = 0
         const val HAS_REGISTER = 1
     }
+
+    const val GLIDE_SIGN = "glide_sign"
 }

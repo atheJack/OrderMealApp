@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/OrderMealApp.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/OrderMealApp.common.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/OrderMealApp.module.iml" filepath="$PROJECT_DIR$/.idea/modules/module/OrderMealApp.module.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/OrderMealApp.module-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/OrderMealApp.module-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/app-api/OrderMealApp.module-api.app-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/app-api/OrderMealApp.module-api.app-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/common-api/OrderMealApp.module-api.common-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/common-api/OrderMealApp.module-api.common-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/login-api/OrderMealApp.module-api.login-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" filepath="$PROJECT_DIR$/.idea/modules/module-api/meal-api/OrderMealApp.module-api.meal-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" filepath="$PROJECT_DIR$/.idea/modules/module/login/OrderMealApp.module.login.iml" />

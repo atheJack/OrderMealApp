@@ -18,6 +18,7 @@ class ManagerViewModel: BaseViewModel() {
     val foodListData: MutableLiveData<CommonResponse<List<Food>>> = MutableLiveData()
     val foodEditImgUrl: MutableLiveData<CommonResponse<String>> = MutableLiveData()
     val foodAddImgUrl: MutableLiveData<CommonResponse<String>> = MutableLiveData()
+    val foodEditFinishData: MutableLiveData<CommonResponse<Food>> = MutableLiveData()
     private val api = NetworkManager.getApi(ManagerApi::class.java)
 
     fun getFoodList() {
@@ -73,6 +74,7 @@ class ManagerViewModel: BaseViewModel() {
                 call: Call<CommonResponse<Food>>?,
                 response: Response<CommonResponse<Food>>?
             ) {
+                foodEditFinishData.postValue(response?.body())
                 LogUtil.d("success:"+response?.body().toString())
             }
 

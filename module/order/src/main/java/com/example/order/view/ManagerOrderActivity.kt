@@ -12,6 +12,7 @@ import com.example.common.model.Order
 import com.example.common.recyclelist.CommonItemClickListener
 import com.example.common.router.Navigation
 import com.example.common.router.Router
+import com.example.common.util.AppUtil
 import com.example.common.util.ToastUtil
 import com.example.order.R
 import com.example.order.recyle.MyOrderListAdapter
@@ -82,6 +83,9 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
         viewModel.getOrderList()
         iv_back.setOnClickListener {
             onBackPressed()
+        }
+        AppUtil.addXGPushNotifyCallback {
+            viewModel.getOrderList()
         }
     }
 

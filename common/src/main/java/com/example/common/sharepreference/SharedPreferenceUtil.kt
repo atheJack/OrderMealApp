@@ -26,8 +26,19 @@ object SharedPreferenceUtil {
         }
     }
 
+    fun putLongSync(context: Context, key: String, value: Long) {
+        getSp(context).edit().apply{
+            putLong(key, value)
+            commit()
+        }
+    }
+
     fun getInt(context: Context, key: String, defaultValue: Int): Int {
         return getSp(context).getInt(key, defaultValue)
+    }
+
+    fun getLong(context: Context, key: String, defaultValue: Long): Long {
+        return getSp(context).getLong(key, defaultValue)
     }
 
 }

@@ -39,7 +39,7 @@
         android:layout_height="@dimen/normal_big_icon_size"/>
     <TextView
         android:id="@+id/tv_order_num"
-        android:text="单号：0123"
+        android:text="单号：000"
         android:layout_margin="@dimen/normal_margin"
         android:gravity="center"
         android:textSize="25sp"

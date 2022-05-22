@@ -3,10 +3,10 @@ package com.example.manager.recyclelist
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.example.common.model.Food
 import com.example.common.recyclelist.CommonHolder
 import com.example.common.recyclelist.CommonItemClickListener
+import com.example.common.util.GlideUtil
 import com.example.manager.R
 
 class FoodManagerHolder(itemView: View) : CommonHolder<Food>(itemView) {
@@ -23,7 +23,7 @@ class FoodManagerHolder(itemView: View) : CommonHolder<Food>(itemView) {
         foodName.text = data[position].name
         foodPrice.text = "￥${data[position].price}"
         val url = data[position].imgUrl
-        Glide.with(itemView).load(url).into(foodImg)
+            GlideUtil.loadUrlWithSign(itemView.context, url, foodImg)
         listener?.onClick(itemView, data, position)
     }
 }
