@@ -30,7 +30,6 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
 
     private fun initObserver() {
         viewModel.registerData.observe(this,{
-            //TODO 需要一个用户提示
             if (it.code == 200) {
                 SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.REGISTER_STATE,
                 SharedPreferenceConst.RegisterStateValue.HAS_REGISTER)
@@ -48,7 +47,6 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
         } else if(password != passwordConfirm){
             ToastUtil.showToastShort(this, "密码与确认密码不一致！")
         } else {
-            // 只允许用户注册
             viewModel.register(User(name = name, password = password, isManager = false))
         }
     }

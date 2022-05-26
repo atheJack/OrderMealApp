@@ -79,6 +79,7 @@
                     android:layout_marginVertical="@dimen/small_margin"
                     android:gravity="center"
                     android:background="@color/app_status_bar_color"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             </LinearLayout>

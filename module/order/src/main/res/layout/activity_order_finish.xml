@@ -54,8 +54,10 @@
     <Button
         android:id="@+id/bt_go_order"
         android:text="查看订单"
+        android:background="@color/app_status_bar_color"
+        android:textColor="@color/white"
         android:layout_marginTop="@dimen/normal_margin"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="40dp"/>
 </LinearLayout>
