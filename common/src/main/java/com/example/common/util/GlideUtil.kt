@@ -18,8 +18,8 @@ object GlideUtil {
         Glide
             .with(context)
             .load(url)
-            .diskCacheStrategy( DiskCacheStrategy.NONE )//禁用磁盘缓存
-            .skipMemoryCache( true )//跳过内存缓存
+            .diskCacheStrategy( DiskCacheStrategy.NONE )
+            .skipMemoryCache( true )
             .into(target)
     }
 
@@ -32,9 +32,6 @@ object GlideUtil {
             .into(target)
     }
 
-    /**
-     * 普通的load，带缓存
-     */
     fun loadUrl(context: Context, url: String, target: ImageView) {
         Glide
             .with(context)

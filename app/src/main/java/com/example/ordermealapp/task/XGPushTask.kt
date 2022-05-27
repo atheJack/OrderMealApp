@@ -15,7 +15,6 @@ object XGPushTask: ITask {
         XGPushConfig.enableDebug(context, true)
         XGPushManager.registerPush(context, object : XGIOperateCallback {
             override fun onSuccess(data: Any, flag: Int) {
-                //token在设备卸载重装的时候有可能会变
                 Log.d("TPush", "注册成功，设备token为：$data")
             }
 
@@ -24,7 +23,6 @@ object XGPushTask: ITask {
             }
         })
         XGPushManager.setNotifactionCallback {
-            //这里设置默认的是因为，这个回调可以自行控制是否显示通知
             val userList = DbManager.getInstance().getDb(AppServiceImp.getApplicationContext()).userDao().getAll()
             if(!userList.isNullOrEmpty()) {
                 val user = userList[0]

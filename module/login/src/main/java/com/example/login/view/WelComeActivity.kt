@@ -28,28 +28,23 @@ class WelComeActivity : BaseActivity<BaseViewModel>() {
     }
 
     private fun jump() {
-        // 检查是否登录
         if (SharedPreferenceUtil.getInt(
                 this, SharedPreferenceConst.LOGIN_STATE,
                 SharedPreferenceConst.LoginStateValue.NO_LOGIN
             ) == SharedPreferenceConst.LoginStateValue.NO_LOGIN
         ) {
-            // 检查是否注册
             if (SharedPreferenceUtil.getInt(
                     this, SharedPreferenceConst.REGISTER_STATE,
                     SharedPreferenceConst.RegisterStateValue.NO_REGISTER
                 ) == SharedPreferenceConst.RegisterStateValue.NO_REGISTER
             ) {
-                //未注册
                 Navigation.jump(this, Router.REGISTER)
                 finish()
             } else {
-                // 注册了直接去登录
                 Navigation.jump(this, Router.LOGIN)
                 finish()
             }
         } else {
-            // 跳转到主页
             val loginMode = SharedPreferenceUtil.getInt(this,
                 SharedPreferenceConst.LOGIN_MODE, SharedPreferenceConst.LoginModeValue.USER_LOGIN)
             if (loginMode == SharedPreferenceConst.LoginModeValue.USER_LOGIN) {

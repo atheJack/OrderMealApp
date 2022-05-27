@@ -19,7 +19,6 @@ class ShoppingDialogFragment: BaseFragment<BaseViewModel>() {
     }
 
     override fun onInit() {
-        //设置整个layout可点击来屏蔽被覆盖的activity的点击
         try {
             fl_shop_container.setOnClickListener {
                 requireActivity().let {

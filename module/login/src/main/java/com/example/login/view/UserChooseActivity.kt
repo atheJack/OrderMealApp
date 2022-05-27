@@ -9,9 +9,6 @@ import com.example.common.sharepreference.SharedPreferenceUtil
 import com.example.login.R
 import kotlinx.android.synthetic.main.activity_user_choose.*
 
-/**
- * 目前不准备使用，只允许用户进行注册，管理员不需要注册
- */
 class UserChooseActivity: BaseActivity<BaseViewModel>() {
 
     override fun onInit() {

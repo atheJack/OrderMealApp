@@ -18,7 +18,6 @@ object DateUtil {
     }
 
     fun timeToString(time: Long): String {
-        //val f = SimpleDateFormat("yyyy 年 MM 月 dd 日 E HH 点 mm 分 ss 秒", Locale.CHINA)
         val f = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
         return f.format(Date(time))
     }

@@ -33,7 +33,6 @@ object FileUtil {
         if (uri.scheme == ContentResolver.SCHEME_FILE)
             File(requireNotNull(uri.path))
         else if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
-            //把文件保存到沙盒
             val contentResolver = context.contentResolver
             val displayName = "${System.currentTimeMillis()}${Random.nextInt(0, 9999)}.${
                 MimeTypeMap.getSingleton()
@@ -55,21 +54,16 @@ object FileUtil {
         val cursor: Cursor? = context.contentResolver.query(
             uri,
             filePathColumn, null, null, null
-        ) //从系统表中查询指定Uri对应的照片
+        )
         cursor?.let {
             it.moveToFirst()
             val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
-            val path = cursor.getString(columnIndex) //获取照片路径
+            val path = cursor.getString(columnIndex)
             return File(path)
         }
         return null
     }
 
-    /**
-     * 质量压缩方法
-     * @param image
-     * @return
-     */
     fun getImageCompressOption(image: Bitmap): Int {
         val baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.PNG, 100, baos)
@@ -94,44 +88,31 @@ object FileUtil {
         return options
     }
 
-    /**
-     * 图片按比例大小压缩方法
-     * @param image （根据Bitmap图片压缩）
-     * @return
-     */
     private fun compressScale(image: Bitmap): Bitmap? {
         val baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 80, baos)
         var isBm = ByteArrayInputStream(baos.toByteArray())
         val newOpts = BitmapFactory.Options()
-        // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
         newOpts.inJustDecodeBounds = true
         var bitmap = BitmapFactory.decodeStream(isBm, null, newOpts)
         newOpts.inJustDecodeBounds = false
         val w = newOpts.outWidth
         val h = newOpts.outHeight
-        // 现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        // float hh = 800f;// 这里设置高度为800f
-        // float ww = 480f;// 这里设置宽度为480f
         val hh = 512f
         val ww = 512f
-        // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        var be = 1 // be=1表示不缩放
-        if (w > h && w > ww) { // 如果宽度大的话根据宽度固定大小缩放
+        var be = 1
+        if (w > h && w > ww) {
             be = (newOpts.outWidth / ww).toInt()
-        } else if (w < h && h > hh) { // 如果高度高的话根据高度固定大小缩放
+        } else if (w < h && h > hh) {
             be = (newOpts.outHeight / hh).toInt()
         }
         if (be <= 0) be = 1
-        newOpts.inSampleSize = be // 设置缩放比例
-        // newOpts.inPreferredConfig = Config.RGB_565;//降低图片从ARGB888到RGB565
-        // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+        newOpts.inSampleSize = be
         isBm = ByteArrayInputStream(baos.toByteArray())
         bitmap = BitmapFactory.decodeStream(isBm, null, newOpts)
         return bitmap
     }
 
-    //保存方法
     fun saveBitmapToFile(context: Context, bm: Bitmap, fileName: String): File? {
         val savePicPath = context.filesDir.absolutePath
         val realPath = "/$savePicPath/lqs/"
@@ -155,16 +136,4 @@ object FileUtil {
         return myCaptureFile
     }
 
-    fun copyFileUsingFileChannels(source: File, dest: File) {
-        var inputChannel: FileChannel? = null
-        var outputChannel: FileChannel? = null
-        try {
-            inputChannel = FileInputStream(source).getChannel()
-            outputChannel = FileOutputStream(dest).channel
-            outputChannel.transferFrom(inputChannel, 0, inputChannel.size())
-        } finally {
-            inputChannel?.close()
-            outputChannel?.close()
-        }
-    }
 }
