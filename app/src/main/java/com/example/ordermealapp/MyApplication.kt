@@ -2,9 +2,6 @@ package com.example.ordermealapp
 
 import android.app.Application
 import androidx.multidex.MultiDex
-import com.example.common.ModuleServiceLoader
-import com.example.meal.moduleapi.MealServiceImp
-import com.example.meal_api.IMealService
 import com.example.ordermealapp.task.ModuleServiceTask
 import com.example.ordermealapp.task.XGPushTask
 

@@ -4,6 +4,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+//        maven { url 'https://maven.aliyun.com/repository/google'}
+//        maven { url 'https://maven.aliyun.com/repository/jcenter'}
         maven {url 'http://maven.aliyun.com/nexus/content/groups/public'}
         maven {url 'http://developer.huawei.com/repo/'}
     }
@@ -22,8 +24,9 @@ allprojects {
         google()
         mavenCentral()
         maven {url 'http://maven.aliyun.com/nexus/content/groups/public'}
+//        maven { url 'https://maven.aliyun.com/repository/google'}
+//        maven { url 'https://maven.aliyun.com/repository/jcenter'}
         maven {url 'http://developer.huawei.com/repo/'}
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 
