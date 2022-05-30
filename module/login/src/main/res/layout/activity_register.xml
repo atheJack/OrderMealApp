@@ -108,7 +108,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bt_login"
         android:layout_marginTop="@dimen/normal_margin"
-        android:text="已注册用户/商家请点击这里"
+        android:text="已注册用户/商家入口"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
