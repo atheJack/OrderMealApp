@@ -1,7 +1,11 @@
 package com.example.main.view
 
+import android.os.Handler
+import android.os.Looper
+import androidx.room.util.DBUtil
 import com.example.common.BaseActivity
 import com.example.common.BaseViewModel
+import com.example.common.database.DbManager
 import com.example.common.router.Navigation
 import com.example.common.router.Router
 import com.example.common.sharepreference.SharedPreferenceConst
@@ -34,6 +38,16 @@ class MainActivity: BaseActivity<BaseViewModel>() {
         ll_exit.setOnClickListener {
             ActivityUtil.finishAll()
         }
+        Thread{
+            val userList = DbManager.getInstance().getDb(this).userDao().getAll()
+            if(!userList.isNullOrEmpty()) {
+                val user = userList[0]
+                val username = user.name
+                Handler(Looper.getMainLooper()).post {
+                    tv_username.text = "你好，${username}"
+                }
+            }
+        }.start()
     }
 
     private fun clearSp() {

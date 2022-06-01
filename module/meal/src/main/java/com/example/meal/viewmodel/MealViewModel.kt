@@ -60,7 +60,7 @@ class MealViewModel: BaseViewModel() {
         }
         val currNum = totalNum.value
         if (currNum != null) {
-            totalNum.postValue(currNum + 1)
+            totalNum.postValue(currNum - 1)
         }
         val list = shopCartFoodData.value
         list?.apply {
