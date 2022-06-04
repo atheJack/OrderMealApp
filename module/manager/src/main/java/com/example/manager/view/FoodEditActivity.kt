@@ -11,6 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.AdapterView
 import com.bumptech.glide.Glide
 import com.example.common.BaseActivity
 import com.example.common.model.Food
@@ -23,12 +25,14 @@ import com.example.common.util.GlideUtil
 import com.example.common.util.ToastUtil
 import com.example.manager.R
 import com.example.manager.viewmodel.ManagerViewModel
+import kotlinx.android.synthetic.main.activity_add_food.*
 import kotlinx.android.synthetic.main.activity_food_edit.*
 import kotlinx.android.synthetic.main.activity_food_edit.bt_change_img
 import kotlinx.android.synthetic.main.activity_food_edit.et_food_name
 import kotlinx.android.synthetic.main.activity_food_edit.et_food_price
 import kotlinx.android.synthetic.main.activity_food_edit.iv_back
 import kotlinx.android.synthetic.main.activity_food_edit.iv_food_img
+import kotlinx.android.synthetic.main.activity_food_edit.sp_food_type
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,6 +43,7 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
 
     private var food: Food = Food()
     private var file: File? = null
+    private var selectType = 0
     private lateinit var progressDialog: ProgressDialog
     override fun createVm(): ManagerViewModel {
         return ManagerViewModel()
@@ -68,6 +73,7 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
         progressDialog = DialogUtil.getLoadingDialog(this, "请等待", "正在上传图片..", false)
         et_food_name.setText(food.name)
         et_food_price.setText(food.price.toString())
+        sp_food_type.setSelection(food.type)
         GlideUtil.loadUrlWithSign(this, food.imgUrl, iv_food_img)
         bt_finish_edit.setOnClickListener {
             if (file == null) {
@@ -92,6 +98,20 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
         }
         bt_change_img.setOnClickListener {
             checkWritePermission()
+        }
+        sp_food_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectType = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
         }
     }
 
@@ -128,6 +148,7 @@ class FoodEditActivity : BaseActivity<ManagerViewModel>() {
         food.name = et_food_name.text.toString()
         food.price = et_food_price.text.toString().toFloat()
         food.imgUrl = imgUrl
+        food.type = selectType
         viewModel.updateFood(food)
         val intent = Intent()
         intent.putExtra("food_edit_finish", Bundle().apply {

@@ -28,6 +28,11 @@
             android:layout_centerHorizontal="true"
             android:text="菜品管理" />
     </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_type_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

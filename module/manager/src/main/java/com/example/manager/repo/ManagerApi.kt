@@ -13,6 +13,9 @@ interface ManagerApi {
     @GET(HostUtil.GET_FOOD)
     fun getFoodList(): Call<CommonResponse<List<Food>>>
 
+    @GET(HostUtil.GET_FOOD_TYPE)
+    fun getFoodTypeList(): Call<CommonResponse<List<Int>>>
+
     @POST(HostUtil.ADD_FOOD)
     fun addFood(@Body food: Food): Call<CommonResponse<Food>>
 

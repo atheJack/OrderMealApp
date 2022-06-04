@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="foodTypeArray">
+        <item>荤菜</item>
+        <item>素菜</item>
+        <item>粉面</item>
+        <item>主食</item>
+        <item>汤</item>
+        <item>饮品</item>
+    </string-array>
+</resources>

@@ -2,7 +2,6 @@ package com.example.main.view
 
 import android.os.Handler
 import android.os.Looper
-import androidx.room.util.DBUtil
 import com.example.common.BaseActivity
 import com.example.common.BaseViewModel
 import com.example.common.database.DbManager

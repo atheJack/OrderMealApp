@@ -11,6 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.AdapterView
 import com.example.common.BaseActivity
 import com.example.common.model.Food
 import com.example.common.util.DialogUtil
@@ -27,6 +29,7 @@ import java.io.File
 class AddFoodActivity: BaseActivity<ManagerViewModel>() {
     private var file: File? = null
     private lateinit var progressDialog: ProgressDialog
+    private var selectType = 0
     override fun createVm(): ManagerViewModel {
         return ManagerViewModel()
     }
@@ -75,6 +78,20 @@ class AddFoodActivity: BaseActivity<ManagerViewModel>() {
         bt_change_img.setOnClickListener {
             checkWritePermission()
         }
+        sp_food_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectType = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
     }
 
     companion object {
@@ -113,6 +130,7 @@ class AddFoodActivity: BaseActivity<ManagerViewModel>() {
         food.name = name
         food.price = price
         food.imgUrl = imgUrl
+        food.type = selectType
         viewModel.addFood(food)
         val intent = Intent()
         intent.putExtra("food_add_finish", Bundle().apply {

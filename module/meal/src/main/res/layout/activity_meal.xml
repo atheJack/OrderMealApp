@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/normal_action_bar_height"
@@ -28,60 +29,71 @@
             android:layout_centerHorizontal="true"
             android:text="点餐页面" />
     </RelativeLayout>
-        <FrameLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_type_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_meal_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_height="match_parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_meal_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fc_shopping_cart_detail"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fc_shopping_cart_detail"
-                android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/bg_meal_bottom_view">
+
+        <ImageView
+            android:id="@+id/iv_open_shopping_cart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:src="@drawable/ic_shopping_cart" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center">
+
+            <TextView
+                android:id="@+id/tv_sum_price"
+                style="@style/normalBigWhiteBoldText"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="bottom" />
-        </FrameLayout>
-        <FrameLayout
-            android:background="@drawable/bg_meal_bottom_view"
-            android:layout_margin="@dimen/normal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iv_open_shopping_cart"
-                android:src="@drawable/ic_shopping_cart"
-                android:layout_marginLeft="@dimen/normal_margin"
-                android:layout_gravity="left|center"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
-            <LinearLayout
-                android:layout_gravity="left|center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_sum_price"
-                    android:layout_marginLeft="70dp"
-                    android:text="￥200.0"
-                    style="@style/normalBigWhiteBoldText"
-                    android:textColor="@color/white"
-                    android:gravity="center|left"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:id="@+id/tv_go_order"
-                    android:text="去下单"
-                    android:padding="@dimen/normal_margin"
-                    android:layout_marginRight="@dimen/normal_margin"
-                    android:layout_marginVertical="@dimen/small_margin"
-                    android:gravity="center"
-                    android:background="@color/app_status_bar_color"
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-        </FrameLayout>
-    </LinearLayout>
+                android:layout_marginLeft="70dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="￥200.0"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_go_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/small_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:background="@color/app_status_bar_color"
+                android:gravity="center"
+                android:padding="@dimen/normal_margin"
+                android:text="去下单"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

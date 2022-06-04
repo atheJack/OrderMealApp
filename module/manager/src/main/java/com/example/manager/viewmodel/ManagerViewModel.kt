@@ -16,6 +16,7 @@ import retrofit2.Response
 
 class ManagerViewModel: BaseViewModel() {
     val foodListData: MutableLiveData<CommonResponse<List<Food>>> = MutableLiveData()
+    var foodTypeData: MutableLiveData<CommonResponse<List<Int>>> = MutableLiveData()
     val foodEditImgUrl: MutableLiveData<CommonResponse<String>> = MutableLiveData()
     val foodAddImgUrl: MutableLiveData<CommonResponse<String>> = MutableLiveData()
     val foodEditFinishData: MutableLiveData<CommonResponse<Food>> = MutableLiveData()
@@ -35,6 +36,21 @@ class ManagerViewModel: BaseViewModel() {
 
             }
 
+        })
+    }
+
+    fun getFoodTypeList() {
+        api.getFoodTypeList().enqueue(object : Callback<CommonResponse<List<Int>>> {
+            override fun onResponse(
+                call: Call<CommonResponse<List<Int>>>?,
+                response: Response<CommonResponse<List<Int>>>?
+            ) {
+                foodTypeData.postValue(response?.body())
+            }
+
+            override fun onFailure(call: Call<CommonResponse<List<Int>>>?, t: Throwable?) {
+
+            }
         })
     }
 

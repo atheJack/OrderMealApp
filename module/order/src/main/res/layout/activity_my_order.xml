@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.OrderDetailActivity">
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_action_bar_height"
+        android:background="@color/app_status_bar_color">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_bar_icon_size"
+            android:layout_height="@dimen/title_bar_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back_white" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/titleBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="我的订单" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_type_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_order_list"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normal_action_bar_height"
-            android:background="@color/app_status_bar_color">
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/title_bar_icon_size"
-                android:layout_height="@dimen/title_bar_icon_size"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/normal_margin"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_back_white" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/titleBarText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:text="我的订单" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_order_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+
 
 </LinearLayout>

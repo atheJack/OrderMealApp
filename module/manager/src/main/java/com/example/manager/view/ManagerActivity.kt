@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.common.BaseActivity
 import com.example.common.model.Food
 import com.example.common.recyclelist.CommonItemClickListener
+import com.example.common.recyclelist.TypeAdapter
 import com.example.common.router.Navigation
 import com.example.common.router.Router
 import com.example.common.sharepreference.SharedPreferenceConst
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_manager.*
 class ManagerActivity : BaseActivity<ManagerViewModel>() {
 
     private var adapter: FoodListAdapter? = null
+    private var typeAdapter: TypeAdapter? = null
     private var tempFood: Food = Food()
 
     companion object {
@@ -39,7 +41,67 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
         initObserver()
     }
 
+    private fun initTypeAdapter(list: List<Int>) {
+        if(typeAdapter == null) {
+            typeAdapter = TypeAdapter(this, list, 0)
+            typeAdapter!!.listener = object:CommonItemClickListener<Int>{
+                override fun onClick(itemView: View, data: List<Int>, position: Int) {
+                    itemView.setOnClickListener {
+                        typeAdapter!!.selectPosition = position
+                        typeAdapter!!.notifyDataSetChanged()
+                        showTypeFoodData(data, position)
+                    }
+                }
+            }
+            val layoutManager = LinearLayoutManager(this)
+            layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            rv_type_list.layoutManager = layoutManager
+            rv_type_list.adapter = typeAdapter
+        } else {
+            typeAdapter!!.notifyDataSetChanged()
+        }
+    }
+
+    private fun getList(list: List<Int>) : List<Int>{
+        val arrayList = ArrayList<Int>()
+        arrayList.add(-1)
+        arrayList.addAll(list)
+        return arrayList
+    }
+
+    private fun showTypeFoodData(data: List<Int>, position: Int) {
+        val foodList = viewModel.foodListData.value?.data
+        if(!foodList.isNullOrEmpty()) {
+            val type = data[position]
+            val newFoodList = ArrayList<Food>()
+            when(type){
+                -1 -> {
+                    newFoodList.addAll(foodList)
+                }
+                else -> {
+                    for(food in foodList) {
+                        if(food.type == type) {
+                            newFoodList.add(food)
+                        }
+                    }
+                }
+            }
+            adapter?.let {
+                adapter!!.data = newFoodList
+                adapter!!.notifyDataSetChanged()
+            }
+        }
+    }
+
     private fun initObserver() {
+        viewModel.foodTypeData.observe(this, {
+            if(it.code == 200) {
+                viewModel.getFoodList()
+                initTypeAdapter(getList(it.data))
+            } else {
+
+            }
+        })
         viewModel.foodListData.observe(this, {
             if (it.code == 200) {
                 if (adapter == null) {
@@ -82,7 +144,7 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
 
     private fun initView() {
         initGlide()
-        viewModel.getFoodList()
+        viewModel.getFoodTypeList()
         fb_add_food.setOnClickListener {
             Navigation.jumpForResult(this, Router.ADD_FOOD, foodAddCode)
         }

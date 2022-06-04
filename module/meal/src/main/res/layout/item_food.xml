@@ -4,11 +4,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/normal_margin">
+    android:background="#ffffff"
+    android:padding="@dimen/normal_margin"
+    android:layout_marginBottom="@dimen/normal_margin"
+    android:layout_marginHorizontal="@dimen/normal_margin">
     <ImageView
         android:id="@+id/iv_food_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_yxrs"
         />

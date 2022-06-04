@@ -16,8 +16,11 @@ import com.example.common.util.AppUtil
 import com.example.common.util.ToastUtil
 import com.example.order.R
 import com.example.order.recyle.MyOrderListAdapter
+import com.example.order.recyle.OrderTypeAdapter
 import com.example.order.viewmodel.ManagerOrderViewModel
 import kotlinx.android.synthetic.main.activity_manager_order.*
+import kotlinx.android.synthetic.main.activity_manager_order.rv_type_list
+import kotlinx.android.synthetic.main.activity_my_order.*
 import kotlinx.android.synthetic.main.activity_my_order.iv_back
 import kotlinx.android.synthetic.main.activity_my_order.rv_order_list
 
@@ -25,6 +28,7 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
     private var adapter: MyOrderListAdapter? = null
     private var orderStates = arrayOf("待处理", "处理中", "已完成")
     private var orderStatesCode = arrayOf(1, 2, 3)
+    private var typeAdapter: OrderTypeAdapter? = null
     override fun createVm(): ManagerOrderViewModel {
         return ManagerOrderViewModel()
     }
@@ -57,9 +61,11 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
                     })
                     rv_order_list.layoutManager = LinearLayoutManager(this)
                     rv_order_list.adapter = adapter
+                    showTypeOrderData(typeAdapter!!.selectPosition+1)
                 } else {
                     adapter!!.data = it.data
                     adapter!!.notifyDataSetChanged()
+                    showTypeOrderData(typeAdapter!!.selectPosition+1)
                 }
             } else {
                 ToastUtil.showToastShort(this, it.message)
@@ -67,13 +73,49 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
         })
     }
 
+    private fun initTypeAdapter() {
+        val list = listOf(1,2,3)
+        typeAdapter = OrderTypeAdapter(this, list, 0)
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        rv_type_list.layoutManager = layoutManager
+        rv_type_list.adapter = typeAdapter
+        typeAdapter!!.listener = object : CommonItemClickListener<Int>{
+            override fun onClick(itemView: View, data: List<Int>, position: Int) {
+                itemView.setOnClickListener{
+                    typeAdapter!!.selectPosition = position
+                    typeAdapter!!.notifyDataSetChanged()
+                    showTypeOrderData(data[position])
+                }
+            }
+        }
+    }
+
+    private fun showTypeOrderData(type: Int) {
+        val orderList = viewModel.orderData.value?.data
+        if(!orderList.isNullOrEmpty()) {
+            val newOrderList = ArrayList<Order>()
+            for (order in orderList) {
+                if (order.state == type) {
+                    newOrderList.add(order)
+                }
+            }
+            adapter?.let {
+                adapter!!.data = newOrderList
+                adapter!!.notifyDataSetChanged()
+            }
+        }
+    }
+
     private fun showChangeStateDialog(order: Order) {
         AlertDialog.Builder(this@ManagerOrderActivity).apply {
             setTitle("订单状态变更")
             setItems(orderStates) { dialog, which ->
                 order.state = orderStatesCode[which]
-                adapter?.notifyDataSetChanged()
                 viewModel.updateOrderState(order)
+                val dataList = adapter!!.data as ArrayList
+                dataList.remove(order)
+                adapter?.notifyDataSetChanged()
                 dialog?.cancel()
             }
         }.show()
@@ -87,6 +129,7 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
         AppUtil.addXGPushNotifyCallback {
             viewModel.getOrderList()
         }
+        initTypeAdapter()
     }
 
 

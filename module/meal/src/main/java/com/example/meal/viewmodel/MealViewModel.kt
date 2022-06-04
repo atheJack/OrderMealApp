@@ -13,6 +13,7 @@ import retrofit2.Response
 class MealViewModel: BaseViewModel() {
 
     var foodData: MutableLiveData<CommonResponse<List<Food>>> = MutableLiveData()
+    var foodTypeData: MutableLiveData<CommonResponse<List<Int>>> = MutableLiveData()
     var totalPrice: MutableLiveData<Float> = MutableLiveData(0f)
     var totalNum: MutableLiveData<Int> = MutableLiveData(0)
     var shopCartFoodData: MutableLiveData<ArrayList<Food>> = MutableLiveData(ArrayList())
@@ -29,6 +30,21 @@ class MealViewModel: BaseViewModel() {
             }
 
             override fun onFailure(call: Call<CommonResponse<List<Food>>>?, t: Throwable?) {
+
+            }
+        })
+    }
+
+    fun getFoodTypeList() {
+        api.getFoodTypeList().enqueue(object : Callback<CommonResponse<List<Int>>> {
+            override fun onResponse(
+                call: Call<CommonResponse<List<Int>>>?,
+                response: Response<CommonResponse<List<Int>>>?
+            ) {
+                foodTypeData.postValue(response?.body())
+            }
+
+            override fun onFailure(call: Call<CommonResponse<List<Int>>>?, t: Throwable?) {
 
             }
         })

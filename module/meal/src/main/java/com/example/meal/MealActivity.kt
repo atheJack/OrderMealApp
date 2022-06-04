@@ -12,12 +12,14 @@ import com.example.common.util.FragmentUtil
 import com.example.common.util.ToastUtil
 import com.example.meal.adapter.MealFoodListAdapter
 import com.example.common.model.Food
+import com.example.common.recyclelist.TypeAdapter
 import com.example.meal.viewmodel.MealViewModel
 import kotlinx.android.synthetic.main.activity_meal.*
 
 class MealActivity: BaseActivity<MealViewModel>() {
 
     private var adapter: MealFoodListAdapter? = null
+    private var typeAdapter: TypeAdapter? = null
     private var fragment: ShoppingDialogFragment = ShoppingDialogFragment()
 
     override fun onInit() {
@@ -26,6 +28,14 @@ class MealActivity: BaseActivity<MealViewModel>() {
     }
 
     private fun initObserver() {
+        viewModel.foodTypeData.observe(this, {
+            if(it.code == 200){
+                viewModel.getFoodList()
+                initTypeAdapter(getList(it.data))
+            } else {
+                ToastUtil.showToastShort(this, it.message)
+            }
+        })
         viewModel.foodData.observe(this, {
             if (it.code == 200) {
                 initAdapter(it)
@@ -44,7 +54,7 @@ class MealActivity: BaseActivity<MealViewModel>() {
     }
 
     private fun initView() {
-        viewModel.getFoodList()
+        viewModel.getFoodTypeList()
         tv_go_order.setOnClickListener {
             Navigation.jumpWithBundle(this, Router.ORDER_DETAIL, Bundle().apply {
                 putSerializable("food_list", viewModel.shopCartFoodData.value)
@@ -68,6 +78,58 @@ class MealActivity: BaseActivity<MealViewModel>() {
         iv_back.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun initTypeAdapter(list: List<Int>) {
+        if(typeAdapter == null) {
+            typeAdapter = TypeAdapter(this, list, 0)
+            typeAdapter!!.listener = object:CommonItemClickListener<Int>{
+                override fun onClick(itemView: View, data: List<Int>, position: Int) {
+                    itemView.setOnClickListener {
+                        typeAdapter!!.selectPosition = position
+                        typeAdapter!!.notifyDataSetChanged()
+                        showTypeFoodData(data, position)
+                    }
+                }
+            }
+            val layoutManager = LinearLayoutManager(this)
+            layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            rv_type_list.layoutManager = layoutManager
+            rv_type_list.adapter = typeAdapter
+        } else {
+            typeAdapter!!.notifyDataSetChanged()
+        }
+    }
+
+    private fun showTypeFoodData(data: List<Int>, position: Int) {
+        val foodList = viewModel.foodData.value?.data
+        if(!foodList.isNullOrEmpty()) {
+            val type = data[position]
+            val newFoodList = ArrayList<Food>()
+            when(type){
+                -1 -> {
+                    newFoodList.addAll(foodList)
+                }
+                else -> {
+                    for(food in foodList) {
+                        if(food.type == type) {
+                            newFoodList.add(food)
+                        }
+                    }
+                }
+            }
+            adapter?.let {
+                adapter!!.data = newFoodList
+                adapter!!.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun getList(list: List<Int>) : List<Int>{
+        val arrayList = ArrayList<Int>()
+        arrayList.add(-1)
+        arrayList.addAll(list)
+        return arrayList
     }
 
     private fun initAdapter(commonResponse: CommonResponse<List<Food>>) {

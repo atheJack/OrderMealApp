@@ -14,6 +14,8 @@ object HostUtil {
 
     const val GET_FOOD = "/food/get_all_food"
 
+    const val GET_FOOD_TYPE = "/food/get_food_type"
+
     const val UPDATE_FOOD = "/food/update"
 
     const val DELETE_FOOD = "/food/delete"

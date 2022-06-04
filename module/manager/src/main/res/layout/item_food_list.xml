@@ -4,11 +4,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/normal_margin">
+    android:background="#ffffff"
+    android:padding="@dimen/normal_margin"
+    android:layout_marginBottom="@dimen/normal_margin"
+    android:layout_marginHorizontal="@dimen/normal_margin">
     <ImageView
         android:id="@+id/iv_food_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_yxrs"
         />
@@ -29,8 +32,8 @@
             />
         <ImageView
             android:id="@+id/iv_food_edit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/ic_edit_food"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -50,8 +53,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:src="@drawable/ic_del_food"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
