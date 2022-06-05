@@ -1,5 +1,8 @@
 package com.example.manager.view
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +18,7 @@ import com.example.common.router.Navigation
 import com.example.common.router.Router
 import com.example.common.sharepreference.SharedPreferenceConst
 import com.example.common.sharepreference.SharedPreferenceUtil
+import com.example.common.util.DialogUtil
 import com.example.common.util.ToastUtil
 import com.example.manager.R
 import com.example.manager.viewmodel.ManagerViewModel
@@ -26,6 +30,8 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
     private var adapter: FoodListAdapter? = null
     private var typeAdapter: TypeAdapter? = null
     private var tempFood: Food = Food()
+    private var tempType: Int = 0
+    private lateinit var progressDialog: ProgressDialog
 
     companion object {
         const val foodEditCode = 1
@@ -58,7 +64,11 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
             rv_type_list.layoutManager = layoutManager
             rv_type_list.adapter = typeAdapter
         } else {
+            val position = list.indexOf(tempType)
+            typeAdapter!!.data = list
+            typeAdapter!!.selectPosition = position
             typeAdapter!!.notifyDataSetChanged()
+            showTypeFoodData(typeAdapter!!.data, position)
         }
     }
 
@@ -98,8 +108,11 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
             if(it.code == 200) {
                 viewModel.getFoodList()
                 initTypeAdapter(getList(it.data))
+                if(progressDialog.isShowing) {
+                    progressDialog.dismiss()
+                }
             } else {
-
+                ToastUtil.showToastShort(this, it.message)
             }
         })
         viewModel.foodListData.observe(this, {
@@ -123,18 +136,14 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
                                         })
                                 }
                                 delFoodBt.setOnClickListener {
-                                    viewModel.delFood(data[position])
-                                    val listArr: ArrayList<Food> = data as ArrayList<Food>
-                                    listArr.remove(data[position])
-                                    adapter!!.notifyDataSetChanged()
+                                    showDelDialog(data, position)
                                 }
                             }
                         })
                     rv_meal_list.adapter = adapter
                     rv_meal_list.layoutManager = LinearLayoutManager(this)
                 } else {
-                    adapter!!.data = it.data as ArrayList<Food>
-                    adapter!!.notifyDataSetChanged()
+                    showTypeFoodData(typeAdapter!!.data, typeAdapter!!.selectPosition)
                 }
             } else {
                 ToastUtil.showToastLong(this, it.message)
@@ -144,6 +153,7 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
 
     private fun initView() {
         initGlide()
+        progressDialog = DialogUtil.getLoadingDialog(this, "请等待", "正在更新信息..", false)
         viewModel.getFoodTypeList()
         fb_add_food.setOnClickListener {
             Navigation.jumpForResult(this, Router.ADD_FOOD, foodAddCode)
@@ -159,32 +169,49 @@ class ManagerActivity : BaseActivity<ManagerViewModel>() {
         }
     }
 
+    private fun showDelDialog(data: List<Food>, position: Int) {
+        AlertDialog.Builder(this)
+            .setTitle("删除菜品")
+            .setMessage("是否确认删除该菜品？")
+            .setPositiveButton("删除") { dialog, which ->
+                viewModel.delFood(data[position])
+                val listArr = viewModel.foodListData.value!!.data as ArrayList<Food>
+                listArr.remove(data[position])
+                showTypeFoodData(typeAdapter!!.data, typeAdapter!!.selectPosition)
+            }
+            .setNegativeButton("取消"
+            ) { dialog, which -> dialog.dismiss() }
+            .show()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == foodEditCode && resultCode == RESULT_OK) {
             val foodBundle = data?.getBundleExtra("food_edit_finish")
             val food = foodBundle?.getSerializable("food") as Food?
             food?.let {
+                progressDialog.show()
+                tempType = food.type
                 tempFood.name = food.name
                 tempFood.price = food.price
                 tempFood.imgUrl = food.imgUrl
-                adapter?.notifyDataSetChanged()
+                tempFood.type = food.type
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.getFoodTypeList()
+                }, 1000)
             }
-            Handler(Looper.getMainLooper()).postDelayed({
-                viewModel.getFoodList()
-            }, 2000)
         } else if (requestCode == foodAddCode && resultCode == RESULT_OK) {
             val foodBundle = data?.getBundleExtra("food_add_finish")
             val food = foodBundle?.getSerializable("food") as Food?
+            val foodList = viewModel.foodListData.value?.data as ArrayList
             food?.let {
-                adapter?.let {
-                    it.data.add(food)
-                    it.notifyDataSetChanged()
-                }
+                progressDialog.show()
+                tempType = food.type
+                foodList.add(food)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.getFoodTypeList()
+                }, 1000)
             }
-            Handler(Looper.getMainLooper()).postDelayed({
-                viewModel.getFoodList()
-            }, 2000)
         }
     }
 

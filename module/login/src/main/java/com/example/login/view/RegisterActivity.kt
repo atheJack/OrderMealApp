@@ -34,6 +34,8 @@ class RegisterActivity : BaseActivity<LoginViewModel>() {
                 SharedPreferenceUtil.putIntAsync(this, SharedPreferenceConst.REGISTER_STATE,
                 SharedPreferenceConst.RegisterStateValue.HAS_REGISTER)
                 Navigation.jump(this, Router.LOGIN)
+            } else {
+                ToastUtil.showToastLong(this, it.message)
             }
         })
     }
