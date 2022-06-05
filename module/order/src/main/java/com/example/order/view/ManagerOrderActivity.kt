@@ -111,11 +111,13 @@ class ManagerOrderActivity: BaseActivity<ManagerOrderViewModel>() {
         AlertDialog.Builder(this@ManagerOrderActivity).apply {
             setTitle("订单状态变更")
             setItems(orderStates) { dialog, which ->
-                order.state = orderStatesCode[which]
-                viewModel.updateOrderState(order)
-                val dataList = adapter!!.data as ArrayList
-                dataList.remove(order)
-                adapter?.notifyDataSetChanged()
+                if (order.state != orderStatesCode[which]) {
+                    order.state = orderStatesCode[which]
+                    viewModel.updateOrderState(order)
+                    val dataList = adapter!!.data as ArrayList
+                    dataList.remove(order)
+                    adapter?.notifyDataSetChanged()
+                }
                 dialog?.cancel()
             }
         }.show()
