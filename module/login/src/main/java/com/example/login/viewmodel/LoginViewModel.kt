@@ -5,6 +5,9 @@ import com.example.common.network.CommonResponse
 import com.example.common.network.NetworkManager
 import com.example.common.model.User
 import com.example.login.repo.LoginApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +18,12 @@ class LoginViewModel: BaseViewModel() {
     val loginData: MutableLiveData<CommonResponse<User>> = MutableLiveData()
     private val api = NetworkManager.getApi(LoginApi::class.java)
 
+
     fun register(user: User) {
+        // 开协程
+        CoroutineScope(Dispatchers.Default).launch {
+
+        }
         val call = api.register(user)
         call.enqueue(object : Callback<CommonResponse<User>> {
             override fun onResponse(
